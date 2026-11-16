@@ -1,0 +1,20 @@
+{
+  "name": "live-sports-web",
+  "version": "1.0.0",
+  "description": "Clean, minimalist, responsive live sports website with AI-driven match research and automated deployment.",
+  "type": "module",
+  "scripts": {
+    "update-matches": "node scripts/update-matches.mjs"
+  },
+  "keywords": [
+    "sports",
+    "cricket",
+    "football",
+    "basketball",
+    "tennis",
+    "live-scores",
+    "streaming"
+  ],
+  "author": "yarg516-sys",
+  "license": "MIT"
+}
