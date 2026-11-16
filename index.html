@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlobalSports Live — Worldwide Live Matches, Scores & Streaming</title>
+  <meta name="description" content="Watch live sports matches from every corner of the world. Cricket, Football, Basketball, Tennis, Formula 1, and more with real-time scores, match timings, and streaming options.">
+
+  <!-- Inter Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/player.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. TOP REAL-TIME LIVE SCORES TICKER TAPE
+       ========================================================================= -->
+  <div class="ticker-wrap" aria-label="Live Scores Ticker">
+    <div class="ticker-label">
+      <span class="pulse-dot"></span>
+      <span>Live Scores</span>
+    </div>
+    <div class="ticker-track">
+      <div class="ticker-content" id="liveScoresTicker">
+        <!-- Injected dynamically by liveEngine.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. HEADER & NAVIGATION
+       ========================================================================= -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-wrapper">
+        <a href="index.html" class="brand-logo" aria-label="GlobalSports Live Home">
+          <div class="brand-icon">🌐</div>
+          <span>GLOBAL<span class="brand-accent">SPORTS</span></span>
+        </a>
+      </div>
+
+      <!-- Main Navigation -->
+      <nav class="main-nav" id="navMenu">
+        <a href="#matches" class="nav-link active" data-view="matches">
+          <span>Matches</span>
+          <span class="nav-badge-live">
+            <span class="pulse-dot"></span>
+            <span id="globalLiveCount">0</span> LIVE
+          </span>
+        </a>
+        <a href="#news" class="nav-link" data-view="news">
+          <span>News</span>
+        </a>
+      </nav>
+
+      <!-- Right Header Actions -->
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <button class="icon-btn" id="themeToggleBtn" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+
+        <!-- Mobile Drawer Toggle -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       3. MAIN VIEW: MATCHES (Default Active View)
+       ========================================================================= -->
+  <main id="matchesViewContainer">
+    <!-- Hero / Intro Strip -->
+    <section class="hero-strip">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1>Worldwide Live Sports Coverage</h1>
+          <p>Live streams, scores, and real-time match timings from every continent.</p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-chip live">
+            <span class="pulse-dot"></span>
+            <span id="statLiveCount">0 Live</span>
+          </div>
+          <div class="stat-chip">
+            <span id="statUpcomingCount">0 Scheduled</span>
+          </div>
+          <div class="stat-chip">
+            <span>Live Coverage Ready</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sports Category Filter Bar -->
+    <section class="category-bar-section">
+      <div class="category-scroll-container" id="sportsCategoryList">
+        <!-- Rendered dynamically by app.js (All, Football, Cricket, Basketball, Tennis, F1, More) -->
+      </div>
+    </section>
+
+    <!-- Controls: Status Filter Tabs & Search Box -->
+    <section class="control-bar">
+      <div class="status-tabs">
+        <button class="filter-tab-btn active" data-status="all">All Matches</button>
+        <button class="filter-tab-btn" data-status="live">Live Now 🔴</button>
+        <button class="filter-tab-btn" data-status="upcoming">Upcoming ⏰</button>
+        <button class="filter-tab-btn" data-status="pinned">Favorites ⭐</button>
+        <button class="filter-tab-btn" data-status="finished">Finished</button>
+      </div>
+
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="matchSearchInput" class="search-input" placeholder="Search teams, tournament, country..." autocomplete="off">
+        <button id="searchClearBtn" class="search-clear" title="Clear search">&times;</button>
+      </div>
+    </section>
+
+    <!-- Matches Grid -->
+    <section class="matches-container">
+      <div class="matches-grid" id="matchesGrid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       4. BLANK NEWS SECTION (As requested by user: "keep News section blank")
+       ========================================================================= -->
+  <section id="newsViewContainer" class="news-section-wrapper" style="display: none;">
+    <div class="news-container-blank">
+      <div class="blank-icon">📰</div>
+      <h2>News</h2>
+      <p>This section is currently blank.</p>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. INTERACTIVE LIVE STREAMING VIDEO PLAYER MODAL
+       ========================================================================= -->
+  <div class="player-modal-backdrop" id="playerModal" role="dialog" aria-modal="true" aria-label="Live Match Stream">
+    <div class="player-card">
+      <!-- Player Modal Header -->
+      <header class="player-modal-header">
+        <div class="modal-header-info">
+          <h2 class="modal-match-title" id="playerMatchTitle">Match Stream</h2>
+          <div class="modal-match-sub">
+            <span id="playerLeague">League</span>
+            <span>•</span>
+            <span id="playerVenue">Stadium</span>
+          </div>
+        </div>
+
+        <div class="modal-header-actions">
+          <div class="server-selector-wrap" title="Change stream server CDN">
+            <label for="serverSelect" style="font-size: 0.75rem; color: var(--text-muted);">Server:</label>
+            <select id="serverSelect" class="server-select">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+          <span class="quality-badge" id="playerQualityBadge">1080p60</span>
+          <button class="btn-close-modal" id="closePlayerBtn" title="Close stream (Esc)" aria-label="Close modal">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Player Body Grid: Video Screen (Left) + Match Sidebar (Right) -->
+      <div class="player-body-grid">
+        <!-- Video Screen Column -->
+        <div class="video-stage-column" id="playerContainer">
+          <div class="video-player-container">
+            <!-- Simulated Broadcast Canvas Stream -->
+            <canvas id="broadcastCanvas" class="broadcast-canvas"></canvas>
+
+            <!-- TV Broadcast Overlay Scorebug -->
+            <div class="broadcast-scorebug">
+              <div class="scorebug-teams">
+                <span class="scorebug-code" id="scorebugTeam1">T1</span>
+                <span class="scorebug-scores"><span id="scorebugScore1">0</span> - <span id="scorebugScore2">0</span></span>
+                <span class="scorebug-code" id="scorebugTeam2">T2</span>
+              </div>
+              <div class="scorebug-clock" id="scorebugClock">LIVE</div>
+            </div>
+
+            <!-- Buffering Spinner Overlay -->
+            <div class="player-buffering-overlay" id="playerBufferOverlay">
+              <div class="spinner"></div>
+              <span style="color: #fff; font-size: 0.85rem;">Connecting to Stream Server...</span>
+            </div>
+
+            <!-- Paused Overlay -->
+            <div class="paused-overlay" id="playerPausedIndicator" style="display: none;">
+              <div class="paused-icon-badge">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- In-Player Toast -->
+            <div class="player-toast" id="playerToast">Connected to Server</div>
+          </div>
+
+          <!-- Video Control Bar -->
+          <div class="video-control-bar">
+            <div class="ctrl-left">
+              <button class="ctrl-btn" id="playPauseBtn" title="Play / Pause (Space)">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <rect x="6" y="4" width="4" height="16" rx="1"/>
+                  <rect x="14" y="4" width="4" height="16" rx="1"/>
+                </svg>
+              </button>
+
+              <div class="ctrl-volume-group">
+                <button class="ctrl-btn" id="volumeBtn" title="Mute / Unmute (M)">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                  </svg>
+                </button>
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.8">
+              </div>
+
+              <div class="live-indicator-pill">
+                <span class="pulse-dot"></span>
+                <span>LIVE FEED</span>
+              </div>
+            </div>
+
+            <div class="ctrl-right">
+              <button class="ctrl-btn theater-mode-btn" id="theaterBtn" title="Theater Mode">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <line x1="16" y1="4" x2="16" y2="20"/>
+                </svg>
+              </button>
+              <button class="ctrl-btn" id="fullscreenBtn" title="Fullscreen (F)">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Column (Tabs: Live Stats, Commentary, Chat) -->
+        <div class="player-sidebar-column">
+          <div class="player-tabs-header">
+            <button class="player-tab-btn active" data-tab="tabStats">Stats</button>
+            <button class="player-tab-btn" data-tab="tabCommentary">Commentary</button>
+            <button class="player-tab-btn" data-tab="tabChat">Fan Chat</button>
+          </div>
+
+          <div class="player-tab-content">
+            <!-- Tab 1: Live Stats -->
+            <div class="player-tab-pane active" id="tabStats">
+              <div id="playerStatsContainer">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+
+            <!-- Tab 2: Live Commentary -->
+            <div class="player-tab-pane" id="tabCommentary">
+              <div class="commentary-list" id="playerCommentaryList">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+
+            <!-- Tab 3: Interactive Fan Chat -->
+            <div class="player-tab-pane" id="tabChat">
+              <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                  <!-- Real-time chat bubbles -->
+                </div>
+                <div class="chat-input-bar">
+                  <input type="text" id="chatInput" class="chat-input" placeholder="Join the live discussion..." maxlength="120">
+                  <button id="chatSendBtn" class="chat-send-btn">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       6. GLOBAL TOAST / LIVE NOTIFICATION BANNER
+       ========================================================================= -->
+  <div class="live-notification-banner" id="liveNotificationBanner"></div>
+
+  <!-- =========================================================================
+       7. MINIMALIST FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">GLOBAL<span class="brand-accent">SPORTS</span></div>
+        <p class="footer-desc">Real-time global sports tracking and streaming aggregator covering Football, Cricket, Basketball, Tennis & more.</p>
+      </div>
+
+      <nav class="footer-nav">
+        <a href="#matches" onclick="app.switchView('matches'); return false;">Matches</a>
+        <a href="#news" onclick="app.switchView('news'); return false;">News</a>
+        <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Back to Top ↑</a>
+      </nav>
+
+      <div class="footer-copyright">
+        <p>© 2026 GlobalSports Live. All rights reserved. Clean, responsive, minimal sports interface.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/liveEngine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

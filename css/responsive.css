@@ -1,0 +1,189 @@
+/* ==========================================================================
+   RESPONSIVE DESIGN & ADAPTIVE LAYOUT
+   ========================================================================== */
+
+/* Large Tablets & Small Laptops (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .matches-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  .player-body-grid {
+    grid-template-columns: 1fr 300px;
+  }
+}
+
+/* Tablets (max-width: 768px) */
+@media (max-width: 768px) {
+  .header-inner {
+    padding: 0 16px;
+    height: 58px;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: var(--text-secondary);
+    border-radius: var(--radius-sm);
+  }
+
+  .main-nav {
+    position: fixed;
+    top: 58px;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 20px;
+    gap: 8px;
+    transform: translateY(-120%);
+    transition: transform 0.3s ease;
+    z-index: 49;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .main-nav.open {
+    transform: translateY(0);
+  }
+
+  .nav-link {
+    padding: 12px 16px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .hero-strip {
+    padding: 20px 0 16px;
+  }
+
+  .hero-inner {
+    padding: 0 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .hero-text h1 {
+    font-size: 1.4rem;
+  }
+
+  .control-bar {
+    padding: 0 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .status-tabs {
+    overflow-x: auto;
+    width: 100%;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+
+  .status-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .search-box {
+    width: 100%;
+    max-width: none;
+  }
+
+  .matches-container {
+    padding: 0 16px 40px;
+  }
+
+  .matches-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  /* Player Modal Stacking on Mobile */
+  .player-modal-backdrop {
+    padding: 0;
+  }
+
+  .player-card {
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+
+  .player-body-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: unset;
+  }
+
+  .video-stage-column {
+    height: 240px;
+  }
+
+  .modal-match-title {
+    font-size: 0.95rem;
+  }
+
+  .server-selector-wrap {
+    display: none;
+  }
+
+  .theater-mode-btn {
+    display: none;
+  }
+
+  .footer-inner {
+    padding: 0 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+/* Small Phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .brand-logo span:last-child {
+    font-size: 1.1rem;
+  }
+
+  .ticker-wrap {
+    height: 34px;
+  }
+
+  .ticker-label {
+    padding: 0 10px;
+    font-size: 0.7rem;
+  }
+
+  .match-card {
+    padding: 16px;
+  }
+
+  .team-name {
+    font-size: 0.92rem;
+  }
+
+  .team-score {
+    font-size: 1.05rem;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-watch {
+    width: 100%;
+  }
+
+  .stream-indicators {
+    justify-content: center;
+  }
+}
